@@ -14,7 +14,7 @@ Status](https://david-dm.org/SungardAS/particles-rds.svg?branch=master)](https:/
 *ALPHA*
 
 This particle is in ALPHA status.  It may have bugs and may change
-structure regurally.
+structure regularly.
 
 [Condensation](https://github.com/SungardAS/condensation) particles that create AWS CloudFormation templates.
 
