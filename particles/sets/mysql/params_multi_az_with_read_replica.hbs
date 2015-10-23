@@ -1,0 +1,110 @@
+  {{
+    parameter "module:particles-common-core" "base"
+    logicalId="SourceDBInstanceIdentifier"
+    type="String"
+    default=""
+    description="Only used if CreateReplicaResource is set to true.  The replica will be based on the ARN provided here."
+  }}
+
+
+  {{
+    set "module:particles-common-core" "true_false"
+    parameterLogicalId="CreateRDSResource"
+    default=createRDSResource
+    description="If true then a mulit-AZ RDS cluster will be created with R/W access"
+  }}
+
+  {{
+    set "module:particles-common-core" "true_false"
+    parameterLogicalId="CreateReplicaResource"
+    default=createReplicaResource
+    description="If true then a read replica will be created based on the ARN provided in SourceDBInstanceIdentifier"
+  }}
+
+  {{set 'mysql/params_multi_az'}}
+
+
+  {{#resource logicalId="RDSStack"}}
+    "Type": "AWS::CloudFormation::Stack",
+    "Condition": "CreateRDSResourceIsTrueCondition",
+    "Properties": {
+      "TemplateURL": "{{templateS3Url 'layouts/rds/mysql_multi_az.template.json'}}",
+      "Parameters": {
+        "VpcId": {"Ref": "VpcId"},
+        "SubnetIds": {"Ref": "SubnetIds"},
+        "DBSecurityGroupId": {"Fn::If": [
+          "DBSecurityGroupIdIsEmpty",
+          {"Ref": "DBSecurityGroup"},
+          {"Ref": "DBSecurityGroupId"}
+        ]},
+        "MasterUserPassword": {"Ref": "MasterUserPassword"},
+        "MasterUsername": {"Ref": "MasterUsername"},
+        "StorageEncrypted": {"Ref": "StorageEncrypted"},
+        "DBInstanceClass": {"Ref": "DBInstanceClass"},
+        "DBSnapshotIdentifier":  {"Ref": "DBSnapshotIdentifier"},
+        "NameTag":  {"Ref": "NameTag"}
+      }
+    }
+  {{/resource}}
+
+  {{#output logicalId="RDSInstanceID"}}
+    "Condition": "CreateRDSResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "RDSStack", "Outputs.InstanceID" ] }
+  {{/output}}
+
+  {{#output logicalId="RDSEndpointAddress"}}
+    "Condition": "CreateRDSResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "RDSStack", "Outputs.EndpointAddress" ] }
+  {{/output}}
+
+  {{#output logicalId="RDSEndpointPort"}}
+    "Condition": "CreateRDSResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "RDSStack", "Outputs.EndpointPort" ] }
+  {{/output}}
+
+  {{#output logicalId="RDSARN"}}
+    "Condition": "CreateRDSResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "RDSStack", "Outputs.ARN" ] }
+  {{/output}}
+
+
+  {{#resource logicalId="ReplicaStack"}}
+    "Type": "AWS::CloudFormation::Stack",
+    "Condition": "CreateReplicaResourceIsTrueCondition",
+    "Properties": {
+      "TemplateURL": "{{templateS3Url 'layouts/rds/mysql_read_replica.template.json'}}",
+      "Parameters": {
+        "VpcId": {"Ref": "VpcId"},
+        "SubnetIds": {"Ref": "SubnetIds"},
+        "DBSecurityGroupId": {"Fn::If": [
+          "DBSecurityGroupIdIsEmpty",
+          {"Ref": "DBSecurityGroup"},
+          {"Ref": "DBSecurityGroupId"}
+        ]},
+        "DBInstanceClass": {"Ref": "DBInstanceClass"},
+        "SourceDBInstanceIdentifier":  {"Ref": "SourceDBInstanceIdentifier"},
+        "NameTag":  {"Ref": "NameTag"}
+      }
+    }
+  {{/resource}}
+
+  {{#output logicalId="ReplicaInstanceID"}}
+    "Condition": "CreateReplicaResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "ReplicaStack", "Outputs.InstanceID" ] }
+  {{/output}}
+
+  {{#output logicalId="ReplicaEndpointAddress"}}
+    "Condition": "CreateReplicaResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "ReplicaStack", "Outputs.EndpointAddress" ] }
+  {{/output}}
+
+  {{#output logicalId="ReplicaEndpointPort"}}
+    "Condition": "CreateReplicaResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "ReplicaStack", "Outputs.EndpointPort" ] }
+  {{/output}}
+
+  {{#output logicalId="ReplicaARN"}}
+    "Condition": "CreateReplicaResourceIsTrueCondition",
+    "Value": { "Fn::GetAtt": [ "ReplicaStack", "Outputs.ARN" ] }
+  {{/output}}
+

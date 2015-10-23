@@ -1,0 +1,59 @@
+{{#layout}}
+
+  {{set "mysql/params_multi_az"}}
+  {{set "mysql/network_params"}}
+  {{set 'mysql/resources_shared'}}
+
+  {{
+    parameter "module:particles-common-core" "base"
+    logicalId="NameTag"
+    type="String"
+    default="condensation"
+    description="Set the name tag for resources."
+    minLength="1"
+    maxLength="255"
+    allowedPattern="[\\x20-\\x7E]*"
+    constraintDescription="can contain only ASCII characters."
+  }}
+
+  {{
+    resource "db_subnet_group" 
+    logicalId="DBSubnetGroup"
+    groupDescription='{"Ref": "NameTag"}'
+    subnetIds='{"Ref": "SubnetIds"}'
+  }}
+
+  {{#resource logicalId="DBInstance"}}
+    "Type": "AWS::RDS::DBInstance",
+    "DeletionPolicy": "Snapshot",
+    "Properties": {
+      "AllocatedStorage": {"Ref": "AllocatedStorage"},
+      "DBInstanceClass": {"Ref": "DBInstanceClass"},
+      "DBSnapshotIdentifier": {"Fn::If": [
+        "DBSnapshotIdentifierIsEmpty",
+        {"Ref": "AWS::NoValue"},
+        {"Ref": "DBSnapshotIdentifier"}
+      ]},
+      "DBSubnetGroupName": {"Ref": "DBSubnetGroup"},
+      "DBName": {"Fn::If": [
+        "DBSnapshotIdentifierIsEmpty",
+        {"Ref": "DBName"},
+        {"Ref": "AWS::NoValue"}
+      ]},
+      "Engine": "MySQL",
+      "MasterUserPassword": {"Ref": "MasterUserPassword"},
+      "MasterUsername": {"Ref": "MasterUsername"},
+      "MultiAZ": {"Fn::If": ["MultiAZCondition", true, false]},
+      "StorageEncrypted": {"Fn::If": ["StorageEncryptedCondition", true, false]},
+      "StorageType": "gp2",
+      "VPCSecurityGroups": [{"Fn::If": [
+        "DBSecurityGroupIdIsEmpty",
+        {"Ref": "DBSecurityGroup"},
+        {"Ref": "DBSecurityGroupId"}
+      ]}]
+    }
+  {{/resource}}
+
+  {{set "output_instance_all" rdsInstanceLogicalId="DBInstance"}}
+
+{{/layout}}

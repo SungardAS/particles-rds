@@ -1,0 +1,54 @@
+{{#layout}}
+
+
+  {{set 'mysql/params_shared'}}
+
+  {{
+    parameter "module:particles-common-core" "base"
+    logicalId="SourceDBInstanceIdentifier"
+    type="String"
+    default=""
+    description=""
+  }}
+
+
+  {{#resource logicalId="DBSubnetGroup"}}
+    "Type": "AWS::RDS::DBSubnetGroup",
+    "Properties": {
+    "DBSubnetGroupDescription": {"Ref": "NameTag"},
+      "SubnetIds": {"Ref": "SubnetIds"}
+    }
+  {{/resource}}
+
+  {{#resource logicalId="DBInstance"}}
+    "Type": "AWS::RDS::DBInstance",
+    "Properties": {
+      "DBInstanceClass": {"Ref": "DBInstanceClass"},
+      "SourceDBInstanceIdentifier": {"Ref": "SourceDBInstanceIdentifier"},
+      "DBSubnetGroupName": {"Ref": "DBSubnetGroup"},
+      "Engine": "MySQL",
+      "VPCSecurityGroups": [{"Fn::If": [
+        "DBSecurityGroupIdIsEmpty",
+        {"Ref": "DBSecurityGroup"},
+        {"Ref": "DBSecurityGroupId"}
+      ]}]
+    }
+  {{/resource}}
+
+  {{#output logicalId="InstanceID"}}
+    "Value": {"Ref": "DBInstance"}
+  {{/output}}
+
+  {{#output logicalId="EndpointAddress"}}
+    "Value": {"Fn::GetAtt" : [ "DBInstance", "Endpoint.Address" ]}
+  {{/output}}
+
+  {{#output logicalId="EndpointPort"}}
+    "Value": {"Fn::GetAtt": [ "DBInstance", "Endpoint.Port" ]}
+  {{/output}}
+
+  {{#output logicalId="ARN"}}
+    "Value": {"Fn::Join": [":", ["arn:aws:rds", {"Ref": "AWS::Region"}, {"Ref": "AWS::AccountId"}, "db", {"Ref": "DBInstance"} ]]}
+  {{/output}}
+
+{{/layout}}

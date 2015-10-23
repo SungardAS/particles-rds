@@ -1,0 +1,24 @@
+  {{
+    set "module:particles-common-core" "true_false"
+    parameterLogicalId="StorageEncrypted"
+    conditionLogicalId="StorageEncryptedCondition"
+    default="false"
+    description="[true|false] If 'true' must use instance class of db.m3.medium or larger"
+  }}
+
+  {{
+    parameter "module:particles-common-core" "base"
+    logicalId="DBInstanceClass"
+    type="String"
+    default="db.t2.micro"
+    description="For encryptioin use db.m3.medium or larger"
+  }}
+
+  {{
+    parameter "module:particles-common-core" "base"
+    logicalId="DBSecurityGroupId"
+    type="String"
+    description="[optional] If blank a new group will be created"
+  }}
+  {{condition "module:particles-common-core" 'is_empty' logicalId="DBSecurityGroupIdIsEmpty" parameterLogicalId="DBSecurityGroupId"}}
+

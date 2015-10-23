@@ -1,0 +1,14 @@
+
+  {{#resource logicalId="DBSecurityGroup"}}
+    "Type": "AWS::EC2::SecurityGroup",
+    "Condition": "DBSecurityGroupIdIsEmpty",
+    "Properties": {
+      "GroupDescription": "RDS MySQL",
+      "VpcId": {"Ref": "VpcId"}
+    }
+  {{/resource}}
+
+  {{#output logicalId="DBSecurityGroupId"}}
+    "Condition": "DBSecurityGroupIdIsEmpty",
+    "Value": {"Ref": "DBSecurityGroup"}
+  {{/output}}
