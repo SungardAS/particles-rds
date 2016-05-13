@@ -51,8 +51,8 @@
     vpcSecurityGroups=(
       partial "m:core" "fn_if"
       conditionId="VpcSecurityGroupIdIsEmpty"
-      trueValue=(ref "VpcSecurityGroup")
-      falseValue=(ref "VpcSecurityGroupId")
+      trueValue=(concat '[' (ref "VpcSecurityGroup") ']')
+      falseValue=(concat '[' (ref "VpcSecurityGroupId") ']')
     )
   }}
 
