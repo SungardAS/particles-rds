@@ -4,7 +4,7 @@
 
   {{set "mysql/params_multi_az"}}
   {{set "mysql/network_params"}}
-  {{set "mysql/vpc_security_group" securityGroupVpcId="VpcId" securityGroupDescription="RDS MySQL"}}
+  {{set "mysql/vpc_security_group" securityGroupVpcId=(ref "VpcId") securityGroupDescription="RDS MySQL"}}
 
   {{
     resource "db_subnet_group"
@@ -37,7 +37,7 @@
     masterUsername=(ref "MasterUsername")
     multiAZ=(
       partial "m:core" "fn_if"
-      conditionId=MultiAZCondition
+      conditionId="MultiAZIsTrueCondition"
       trueValue=true
       falseValue=false
     )
@@ -51,8 +51,8 @@
     vpcSecurityGroups=(
       partial "m:core" "fn_if"
       conditionId="VpcSecurityGroupIdIsEmpty"
-      trueValue=(ref "VpcSecurityGroup")
-      falseValue=(ref "VpcSecurityGroupId")
+      trueValue=(concat '[' (ref "VpcSecurityGroup") ']')
+      falseValue=(concat '[' (ref "VpcSecurityGroupId") ']')
     )
   }}
 

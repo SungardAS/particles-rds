@@ -1,24 +1,26 @@
 # particles-rds
 
-[![logo](https://raw.githubusercontent.com/SungardAS/condensation/master/docs/images/condensation_logo.png)](https://github.com/SungardAS/condensation)
+[![condensation][condensation-image]][condensation-url]
 
-[![NPM](https://nodei.co/npm/particles-rds.png)](https://nodei.co/npm/particles-rds/)
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/SungardAS/condensation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Dependency
-Status](https://david-dm.org/SungardAS/particles-rds.svg?branch=master)](https://david-dm.org/SungardAS/particles-rds?branch=master)
+[![NPM][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Gitter][gitter-image]][gitter-url]
 
 
 ## Summary
 
-*ALPHA*
+[Condensation][condensation-url] particles that create AWS RDS resources
 
-This particle is in ALPHA status.  It may have bugs and may change
-structure regularly.
+## Particles
 
-[Condensation](https://github.com/SungardAS/condensation) particles that create AWS CloudFormation templates.
+### cftemplates
 
-Condensation allows templates and assets to be deployed together,
-to any S3 bucket.  The template will always reference the assets and other templates that it
-was deployed with.
 
+[condensation-image]: https://raw.githubusercontent.com/SungardAS/condensation/master/docs/images/condensation_logo.png
+[condensation-url]: https://github.com/SungardAS/condensation
+[npm-image]: https://badge.fury.io/js/particles-rds.svg
+[npm-url]: https://npmjs.org/package/particles-rds
+[gitter-image]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-url]: https://gitter.im/SungardAS/condensation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[travis-image]: https://travis-ci.org/SungardAS/particles-rds.svg?branch=develop
+[travis-url]: https://travis-ci.org/SungardAS/particles-rds
