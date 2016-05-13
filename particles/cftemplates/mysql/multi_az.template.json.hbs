@@ -4,7 +4,7 @@
 
   {{set "mysql/params_multi_az"}}
   {{set "mysql/network_params"}}
-  {{set "mysql/vpc_security_group" securityGroupVpcId="VpcId" securityGroupDescription="RDS MySQL"}}
+  {{set "mysql/vpc_security_group" securityGroupVpcId=(ref "VpcId") securityGroupDescription="RDS MySQL"}}
 
   {{
     resource "db_subnet_group"
