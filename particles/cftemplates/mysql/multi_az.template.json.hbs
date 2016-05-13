@@ -37,7 +37,7 @@
     masterUsername=(ref "MasterUsername")
     multiAZ=(
       partial "m:core" "fn_if"
-      conditionId=MultiAZCondition
+      conditionId="MultiAZIsTrueCondition"
       trueValue=true
       falseValue=false
     )
