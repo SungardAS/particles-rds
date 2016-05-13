@@ -1,0 +1,8 @@
+{{#resource logicalId="DBSecurityGroup"}}
+  "Type": "AWS::RDS::DBSecurityGroup",
+  "Condition": "DBSecurityGroupIdIsEmpty",
+  "Properties": {
+    "GroupDescription": "RDS MySQL",
+    "VpcId": {"Ref": "VpcId"}
+  }
+{{/resource}}

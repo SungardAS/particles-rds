@@ -2,7 +2,7 @@
   {{set 'mysql/params_common'}}
 
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="AllocatedStorage"
     type="String"
     default="5"
@@ -10,16 +10,16 @@
   }}
 
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="DBSnapshotIdentifier"
     type="String"
     default=""
     description="If set, the RDS R/W database will be initialized from the identified snapshot.  Leave blank to create a fresh DB."
   }}
-  {{condition "module:particles-common-core" 'is_empty' logicalId="DBSnapshotIdentifierIsEmpty" parameterLogicalId="DBSnapshotIdentifier"}}
+  {{condition "m:core" 'is_empty' logicalId="DBSnapshotIdentifierIsEmpty" parameterLogicalId="DBSnapshotIdentifier"}}
 
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="DBName"
     type="String"
     default="condensation"
@@ -27,14 +27,14 @@
   }}
 
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="MasterUsername"
     type="String"
     default="condensation"
   }}
 
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="MasterUserPassword"
     type="String"
     noEcho=true
@@ -43,7 +43,7 @@
   }}
 
   {{
-    set "module:particles-common-core" "true_false"
+    set "m:core" "true_false"
     parameterLogicalId="MultiAZ"
     conditionLogicalId="MultiAZCondition"
     default="true"

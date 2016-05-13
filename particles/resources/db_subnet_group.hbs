@@ -1,6 +1,7 @@
-{{#resource "module:particles-common-core" "base" type="AWS::RDS::DBSubnetGroup"}}
+{{#resource "m:core" "base" type="AWS::RDS::DBSubnetGroup"}}
   "Properties": {
-    "DBSubnetGroupDescription": {{helper "module:particles-common-core" "propertyValue" groupDescription}},
-    "SubnetIds": {{helper "module:particles-common-core" "propertyValue" subnetIds}}
+    "DBSubnetGroupDescription": {{helper "m:core" "propertyValue" groupDescription}},
+    "SubnetIds": {{helper "m:core" "propertyValue" subnetIds}}
+    {{#if tags}},"Tags": {{helper "m:core" "propertyValue" tags}}{{/if}}
   }
 {{/resource}}

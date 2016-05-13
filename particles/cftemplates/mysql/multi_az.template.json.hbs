@@ -1,59 +1,61 @@
 {{#layout}}
 
+  {{parameter "name_tag" logicalId="NameTag"}}
+
   {{set "mysql/params_multi_az"}}
   {{set "mysql/network_params"}}
-  {{set 'mysql/resources_shared'}}
+  {{set "mysql/vpc_security_group" securityGroupVpcId="VpcId" securityGroupDescription="RDS MySQL"}}
 
   {{
-    parameter "module:particles-common-core" "base"
-    logicalId="NameTag"
-    type="String"
-    default="condensation"
-    description="Set the name tag for resources."
-    minLength="1"
-    maxLength="255"
-    allowedPattern="[\\x20-\\x7E]*"
-    constraintDescription="can contain only ASCII characters."
-  }}
-
-  {{
-    resource "db_subnet_group" 
+    resource "db_subnet_group"
     logicalId="DBSubnetGroup"
-    groupDescription='{"Ref": "NameTag"}'
-    subnetIds='{"Ref": "SubnetIds"}'
+    groupDescription=(ref "NameTag")
+    subnetIds=(ref "SubnetIds")
   }}
 
-  {{#resource logicalId="DBInstance"}}
-    "Type": "AWS::RDS::DBInstance",
-    "DeletionPolicy": "Snapshot",
-    "Properties": {
-      "AllocatedStorage": {"Ref": "AllocatedStorage"},
-      "DBInstanceClass": {"Ref": "DBInstanceClass"},
-      "DBSnapshotIdentifier": {"Fn::If": [
-        "DBSnapshotIdentifierIsEmpty",
-        {"Ref": "AWS::NoValue"},
-        {"Ref": "DBSnapshotIdentifier"}
-      ]},
-      "DBSubnetGroupName": {"Ref": "DBSubnetGroup"},
-      "DBName": {"Fn::If": [
-        "DBSnapshotIdentifierIsEmpty",
-        {"Ref": "DBName"},
-        {"Ref": "AWS::NoValue"}
-      ]},
-      "Engine": "MySQL",
-      "MasterUserPassword": {"Ref": "MasterUserPassword"},
-      "MasterUsername": {"Ref": "MasterUsername"},
-      "MultiAZ": {"Fn::If": ["MultiAZCondition", true, false]},
-      "StorageEncrypted": {"Fn::If": ["StorageEncryptedCondition", true, false]},
-      "StorageType": "gp2",
-      "VPCSecurityGroups": [{"Fn::If": [
-        "DBSecurityGroupIdIsEmpty",
-        {"Ref": "DBSecurityGroup"},
-        {"Ref": "DBSecurityGroupId"}
-      ]}]
-    }
-  {{/resource}}
+  {{
+    resource "db_instance"
+    logicalId="DBInstance"
+    deletionPolicy="Snapshot"
+    allocatedStorage=(ref "AllocatedStorage")
+    dbInstanceClass=(ref "DBInstanceClass")
+    dbSnapshotIdentifier=(
+      partial "m:core" "fn_if"
+      conditionId="DBSnapshotIdentifierIsEmpty"
+      trueValue=(ref "AWS::NoValue")
+      falseValue=(ref "DBSnapshotIdentifier")
+    )
+    dbSubnetGroupName=(ref "DBSubnetGroup")
+    dbName=(
+      partial "m:core" "fn_if"
+      conditionId="DBSnapshotIdentifierIsEmpty"
+      trueValue=(ref "DBName")
+      falseValue=(ref "AWS::NoValue")
+    )
+    engine="MySQL"
+    masterUserPassword=(ref "MasterUserPassword")
+    masterUsername=(ref "MasterUsername")
+    multiAZ=(
+      partial "m:core" "fn_if"
+      conditionId=MultiAZCondition
+      trueValue=true
+      falseValue=false
+    )
+    storageEncrypted=(
+      partial "m:core" "fn_if"
+      conditionId="StorageEncryptedIsTrueCondition"
+      trueValue=true
+      falseValue=false
+    )
+    storageType="gp2"
+    vpcSecurityGroups=(
+      partial "m:core" "fn_if"
+      conditionId="VpcSecurityGroupIdIsEmpty"
+      trueValue=(ref "VpcSecurityGroup")
+      falseValue=(ref "VpcSecurityGroupId")
+    )
+  }}
 
-  {{set "output_instance_all" rdsInstanceLogicalId="DBInstance"}}
+  {{set "db_instance/output_all" dbInstanceLogicalId="DBInstance"}}
 
 {{/layout}}

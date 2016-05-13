@@ -1,0 +1,27 @@
+  {{
+    parameter "db_security_group_id"
+    logicalId="VpcSecurityGroupId"
+    description="If blank a new group will be created"
+    optional=true
+  }}
+
+  {{
+    condition "m:core" 'is_empty'
+    logicalId=(scopeId "VpcSecurityGroupIdIsEmpty")
+    parameterLogicalId=(scopeId "VpcSecurityGroupId")
+  }}
+
+  {{
+    resource "m:vpc" "security_group"
+    logicalId="VpcSecurityGroup"
+    condition=(scopeId "VpcSecurityGroupIdIsEmpty")
+    groupDescription=securityGroupDescription
+    vpcId=securityGroupVpcId
+  }}
+
+  {{
+    output "m:core" "base"
+    logicalId=(scopeId "VpcSecurityGroupId")
+    condition=(scopeId "VpcSecurityGroupIdIsEmpty")
+    value=(ref "VpcSecurityGroup")
+  }}

@@ -1,0 +1,22 @@
+{{#resource "module:particles-common-core" "base" type="AWS::RDS::DBCluster"}}
+  "Properties": {
+    "Engine": "aurora"
+    {{#if snapshotCondition}}
+      ,"MasterUsername": {
+        "Fn::If": [
+          "{{snapshotCondition}}",
+          {{masterUsername}},
+          {"Ref": "AWS::NoValue"}
+        ]
+      },
+      "MasterUserPassword": {
+        "Fn::If" : [
+          "{{snapshotCondition}}",
+          {{masterUserPassword}},
+          {"Ref": "AWS::NoValue"}
+        ]
+      }
+    {{else}}
+    {{/if}}
+  }
+{{/resource}}

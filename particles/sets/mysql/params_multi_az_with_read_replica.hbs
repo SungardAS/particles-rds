@@ -1,5 +1,5 @@
   {{
-    parameter "module:particles-common-core" "base"
+    parameter "m:core" "base"
     logicalId="SourceDBInstanceIdentifier"
     type="String"
     default=""
@@ -8,14 +8,14 @@
 
 
   {{
-    set "module:particles-common-core" "true_false"
+    set "m:core" "true_false"
     parameterLogicalId="CreateRDSResource"
     default=createRDSResource
     description="If true then a mulit-AZ RDS cluster will be created with R/W access"
   }}
 
   {{
-    set "module:particles-common-core" "true_false"
+    set "m:core" "true_false"
     parameterLogicalId="CreateReplicaResource"
     default=createReplicaResource
     description="If true then a read replica will be created based on the ARN provided in SourceDBInstanceIdentifier"

@@ -1,0 +1,26 @@
+language: node_js
+sudo: false
+node_js:
+- 5
+- 4
+- '0.12'
+- iojs
+matrix:
+  include:
+  - node_js: 6
+    env: DEPLOY=true
+after_success: if [[ $DEPLOY == "true" ]] ; then ./node_modules/.bin/gulp condensation:deploy
+  ; else echo "no deploy" ; fi
+deploy:
+  provider: npm
+  email: as.us.labs@sungardas.com
+  api_key:
+    secure: c0xvxeoekJHVabKKjxFQzwu6hnGZQ0LzqCGF9NoToorzuRNvBuw+V9AX0lb+FKNSYDpBfR1RJjStV/MqpsbFDBHkHnTN62PJo2nkBd5/srTs1yvXsGXm3UdyGI4mKb9y5P1LzB/I1shni2T3UHjxaTyBLxPHRG09XMHtZ2i5GL4mUnFG7ox6b+hGkgd4ss1n0GXNhl3ulK1hE7lrwWzCqC4K0KcW74iDx+wIEfbFOr+19wS0E5MzH2p01ypsvQhbUE/WaluQ3M77DDBeEgyiZyvayF7zD7HE1ri9tcUTmWA5altKnXrEf4/vx9A/0lxum56/UgGDr0G4ME3ALFs2DI/5Fju37bOJZTyCfZ48PWGXz6w78nxHU7qcnsszudm3g4qlG2smZDwlMKjWYHDGtwBrwgauTttRDdmDxuajJzl5Gy8r3ocEmv4H1gOL5wK1rAjR2z5yEGNwkHhDDJXHLbqK3Op1mDlvXVxumXsboJybV/yKX1dpzLlc1pU/HlCwe4p+03ApGzaMHcflVqpbUzumF5YswiKCOFU3SCT6cA1S+WtVXelQdz4/TITcGeizB4QMnfyJBGFtT6kabuZbzO3yJGjPLvhr/yq6VwW+ivXryL4qk9yiJ/hvbK0Z/PRKIWovhxlbK49CtxpsMNW1RM+/r9yyxWIam+YWC0g6R2k=
+  on:
+    tags: true
+    repo: SungardAS/particles-rds
+    node: 6
+env:
+  global:
+  - secure: C0V3kYFYfQyIS5CtEuiTH8So+RcDyX8Kuk+Fm+S9iVkUFaxvcl6mrnrZgp+rZpAETuyM6bK72pYZDhAGV7np9foaBg1mPFTOD+slfBciG1FxmjRrA+m+UTxPRjbmlkSl1Tm1SY4AojvJc+Q8KVa1IgY0bf6iHyJ71ja31XpRdyY=
+  - secure: QtT5FTVrfBlrVDY29H2mJ2jfVgFiAtV+RZnLDO4zRYtqLq/K85rTtrLICk/NDyPuDj6c37jomjjlDxsCzIyJjA2FpTDVoVidi2rKpZR7aXJHoDzB8IMGG4YJ7AkhPY5XxrQxVDcN0HV3deFsViW4CziZx1ryZ3cIl+uGGfdr7eM=
