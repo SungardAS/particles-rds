@@ -39,7 +39,7 @@
     "git-rev-sync": "^1.6.0",
     "gulp": "^3.9.1",
     "particles-core": "^0.4.3",
-    "particles-vpc": "sungardas/particles-vpc#develop"
+    "particles-vpc": "0.5.0-rc7"
   },
   "devDependencies": {
     "condensation-particle-tests": "^0.5.1",
