@@ -1,0 +1,40 @@
+{
+  "DBCluster": {
+    "Type": "AWS::RDS::DBCluster",
+    "Properties": {
+      "Engine": "aurora",
+      "AvailabilityZones": [
+        "us-east-1a",
+        "us-east-1d"
+      ],
+      "BackupRetentionPeriod": 7,
+      "DBClusterParameterGroupName": {
+        "Ref": "ParameterGroup"
+      },
+      "DBSubnetGroupName": {
+        "Ref": "DBSubnetGroup"
+      },
+      "DatabaseName": "dbName",
+      "EngineVersion": "5.6.10a",
+      "KmsKeyId": "arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef",
+      "MasterUserPassword": "password",
+      "MasterUsername": "user",
+      "Port": 3306,
+      "PreferredBackupWindow": "22:00-22:30",
+      "PreferredMaintenanceWindow": "02:00-02:30",
+      "StorageEncrypted": "true",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "test"
+        }
+      ],
+      "VpcSecurityGroupIds": [
+        {
+          "Ref": "SecurityGroupId"
+        }
+      ]
+    }
+  }
+}
+

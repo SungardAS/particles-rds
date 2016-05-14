@@ -72,7 +72,7 @@
     "Type": "AWS::CloudFormation::Stack",
     "Condition": "CreateReplicaResourceIsTrueCondition",
     "Properties": {
-      "TemplateURL": "{{templateS3Url 'layouts/rds/mysql_read_replica.template.json'}}",
+      "TemplateURL": "{{templateS3Url 'mysql/read_replica.template.json'}}",
       "Parameters": {
         "VpcId": {"Ref": "VpcId"},
         "SubnetIds": {"Ref": "SubnetIds"},

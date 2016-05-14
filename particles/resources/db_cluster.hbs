@@ -1,22 +1,22 @@
-{{#resource "module:particles-common-core" "base" type="AWS::RDS::DBCluster"}}
-  "Properties": {
-    "Engine": "aurora"
-    {{#if snapshotCondition}}
-      ,"MasterUsername": {
-        "Fn::If": [
-          "{{snapshotCondition}}",
-          {{masterUsername}},
-          {"Ref": "AWS::NoValue"}
-        ]
-      },
-      "MasterUserPassword": {
-        "Fn::If" : [
-          "{{snapshotCondition}}",
-          {{masterUserPassword}},
-          {"Ref": "AWS::NoValue"}
-        ]
-      }
-    {{else}}
-    {{/if}}
-  }
+{{#resource "m:core" "base" type="AWS::RDS::DBCluster"}}
+"Properties": {
+  "Engine": {{helper "m:core" "propertyValue" engine}}
+
+  {{#if availabilityZones}},"AvailabilityZones": {{helper "m:core" "propertyValue" availabilityZones}}{{/if}}
+  {{#if backupRetentionPeriod}},"BackupRetentionPeriod": {{helper "m:core" "propertyValue" backupRetentionPeriod forceNumber=true}}{{/if}}
+  {{#if databaseName}},"DatabaseName": {{helper "m:core" "propertyValue" databaseName}}{{/if}}
+  {{#if dbClusterParameterGroupName}},"DBClusterParameterGroupName": {{helper "m:core" "propertyValue" dbClusterParameterGroupName}}{{/if}}
+  {{#if dbSubnetGroupName}},"DBSubnetGroupName": {{helper "m:core" "propertyValue" dbSubnetGroupName}}{{/if}}
+  {{#if engineVersion}},"EngineVersion": {{helper "m:core" "propertyValue" engineVersion}}{{/if}}
+  {{#if kmsKeyId}},"KmsKeyId": {{helper "m:core" "propertyValue" kmsKeyId}}{{/if}}
+  {{#if masterUsername}},"MasterUsername": {{helper "m:core" "propertyValue" masterUsername}}{{/if}}
+  {{#if masterUserPassword}},"MasterUserPassword": {{helper "m:core" "propertyValue" masterUserPassword}}{{/if}}
+  {{#if port}},"Port": {{helper "m:core" "propertyValue" port forceNumber=true}}{{/if}}
+  {{#if preferredBackupWindow}},"PreferredBackupWindow": {{helper "m:core" "propertyValue" preferredBackupWindow}}{{/if}}
+  {{#if preferredMaintenanceWindow}},"PreferredMaintenanceWindow": {{helper "m:core" "propertyValue" preferredMaintenanceWindow}}{{/if}}
+  {{#if snapshotIdentifier}},"SnapshotIdentifier": {{helper "m:core" "propertyValue" snapshotIdentifier}}{{/if}}
+  {{#if storageEncrypted}},"StorageEncrypted": {{helper "m:core" "propertyValue" storageEncrypted}}{{/if}}
+  {{#if tags}},"Tags": {{helper "m:core" "propertyValue" tags}}{{/if}}
+  {{#if vpcSecurityGroupIds}},"VpcSecurityGroupIds": {{helper "m:core" "propertyValue" vpcSecurityGroupIds}}{{/if}}
+}
 {{/resource}}

@@ -2,28 +2,27 @@
   {{set 'mysql/params_common'}}
 
   {{
-    parameter "m:core" "base"
+    parameter "db_instance/allocated_storage"
     logicalId="AllocatedStorage"
-    type="String"
     default="5"
-    description="Storage to allocate to for the database in GB"
   }}
 
   {{
-    parameter "m:core" "base"
+    parameter "db_instance/snapshot_identifier"
     logicalId="DBSnapshotIdentifier"
-    type="String"
     default=""
-    description="If set, the RDS R/W database will be initialized from the identified snapshot.  Leave blank to create a fresh DB."
+    optional=true
   }}
-  {{condition "m:core" 'is_empty' logicalId="DBSnapshotIdentifierIsEmpty" parameterLogicalId="DBSnapshotIdentifier"}}
+  {{
+    condition "m:core" 'is_empty'
+    logicalId="DBSnapshotIdentifierIsEmpty"
+    parameterLogicalId=(scopeId "DBSnapshotIdentifier")
+  }}
 
   {{
-    parameter "m:core" "base"
+    parameter "db_instance/db_name"
     logicalId="DBName"
-    type="String"
     default="condensation"
-    description="Will be ignored if DBSnapshotIdentifier is given"
   }}
 
   {{
@@ -34,10 +33,8 @@
   }}
 
   {{
-    parameter "m:core" "base"
+    parameter "db_instance/password"
     logicalId="MasterUserPassword"
-    type="String"
-    noEcho=true
     default="password"
     description="Default is 'password'"
   }}
