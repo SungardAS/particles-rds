@@ -1,38 +1,38 @@
 {{#resource "m:core" "base" type="AWS::RDS::DBInstance"}}
-"Properties": {
-  "DBInstanceClass": {{helper "m:core" "propertyValue" "propertyValue" dbInstanceClass}}
-  {{#if allocatedStorage}},"AllocatedStorage": {{helper "m:core" "propertyValue" allocatedStorage}}{{/if}}
-  {{#if allowMajorVersionUpgrade}},"AllowMajorVersionUpgrade": {{helper "m:core" "propertyValue" allowMajorVersionUpgrade}}{{/if}}
-  {{#if autoMinorVersionUpgrade}},"AutoMinorVersionUpgrade": {{helper "m:core" "propertyValue" autoMinorVersionUpgrade}}{{/if}}
-  {{#if availabilityZone}},"AvailabilityZone": {{helper "m:core" "propertyValue" availabilityZone}}{{/if}}
-  {{#if backupRetentionPeriod}},"BackupRetentionPeriod": {{helper "m:core" "propertyValue" backupRetentionPeriod}}{{/if}}
-  {{#if characterSetName}},"CharacterSetName": {{helper "m:core" "propertyValue" characterSetName}}{{/if}}
-  {{#if dbClusterIdentifier}},"DBClusterIdentifier": {{helper "m:core" "propertyValue" dbClusterIdentifier}}{{/if}}
-  {{#if dbInstanceClass}},"DBInstanceClass": {{helper "m:core" "propertyValue" dbInstanceClass}}{{/if}}
-  {{#if dbInstanceIdentifier}},"DBInstanceIdentifier": {{helper "m:core" "propertyValue" dbInstanceIdentifier}}{{/if}}
-  {{#if dbName}},"DBName": {{helper "m:core" "propertyValue" dbName}}{{/if}}
-  {{#if dbParameterGroupName}},"DBParameterGroupName": {{helper "m:core" "propertyValue" dbParameterGroupName}}{{/if}}
-  {{#if dbSecurityGroups}},"DBSecurityGroups": {{helper "m:core" "propertyValue" dbSecurityGroups}}{{/if}}
-  {{#if dbSnapshotIdentifier}},"DBSnapshotIdentifier": {{helper "m:core" "propertyValue" dbSnapshotIdentifier}}{{/if}}
-  {{#if dbSubnetGroupName}},"DBSubnetGroupName": {{helper "m:core" "propertyValue" dbSubnetGroupName}}{{/if}}
-  {{#if engine}},"Engine": {{helper "m:core" "propertyValue" engine}}{{/if}}
-  {{#if engineVersion}},"EngineVersion": {{helper "m:core" "propertyValue" engineVersion}}{{/if}}
-  {{#if iops}},"Iops": {{helper "m:core" "propertyValue" iops}}{{/if}}
-  {{#if kmsKeyId}},"KmsKeyId": {{helper "m:core" "propertyValue" kmsKeyId}}{{/if}}
-  {{#if licenseModel}},"LicenseModel": {{helper "m:core" "propertyValue" licenseModel}}{{/if}}
-  {{#if masterUsername}},"MasterUsername": {{helper "m:core" "propertyValue" masterUsername}}{{/if}}
-  {{#if masterUserPassword}},"MasterUserPassword": {{helper "m:core" "propertyValue" masterUserPassword}}{{/if}}
-  {{#if multiAZ}},"MultiAZ": {{helper "m:core" "propertyValue" multiAZ}}{{/if}}
-  {{#if optionGroupName}},"OptionGroupName": {{helper "m:core" "propertyValue" optionGroupName}}{{/if}}
-  {{#if port}},"Port": {{helper "m:core" "propertyValue" port}}{{/if}}
-  {{#if preferredBackupWindow}},"PreferredBackupWindow": {{helper "m:core" "propertyValue" preferredBackupWindow}}{{/if}}
-  {{#if preferredMaintenanceWindow}},"PreferredMaintenanceWindow": {{helper "m:core" "propertyValue" preferredMaintenanceWindow}}{{/if}}
-  {{#if publiclyAccessible}},"PubliclyAccessible": {{helper "m:core" "propertyValue" publiclyAccessible}}{{/if}}
-  {{#if sourceDBInstanceIdentifier}},"SourceDBInstanceIdentifier": {{helper "m:core" "propertyValue" sourceDBInstanceIdentifier}}{{/if}}
-  {{#if storageEncrypted}},"StorageEncrypted": {{helper "m:core" "propertyValue" storageEncrypted}}{{/if}}
-  {{#if storageType}},"StorageType": {{helper "m:core" "propertyValue" storageType}}{{/if}}
-  {{#if tags}},"Tags": {{helper "m:core" "propertyValue" tags}}{{/if}}
-  {{#if vpcSecurityGroups}},"VPCSecurityGroups": {{helper "m:core" "propertyValue" vpcSecurityGroups}}{{/if}}
-}
+  {{#helper "m:core" "properties"}}
+    {{helper "m:core" "property" "DBInstanceClass" valueVariable="dbInstanceClass"}}
+    {{helper "m:core" "property" "AllocatedStorage" optional=true}}
+    {{helper "m:core" "property" "AllowMajorVersionUpgrade" optional=true}}
+    {{helper "m:core" "property" "AutoMinorVersionUpgrade" optional=true}}
+    {{helper "m:core" "property" "AvailabilityZone" optional=true}}
+    {{helper "m:core" "property" "BackupRetentionPeriod" optional=true}}
+    {{helper "m:core" "property" "CharacterSetName" optional=true}}
+    {{helper "m:core" "property" "DBClusterIdentifier" valueVariable="dbClusterIdentifier" optional=true}}
+    {{helper "m:core" "property" "DBInstanceClass" valueVariable="dbInstanceClass" optional=true}}
+    {{helper "m:core" "property" "DBInstanceIdentifier" valueVariable="dbInstanceIdentifier" optional=true}}
+    {{helper "m:core" "property" "DBName" valueVariable="dbName" optional=true}}
+    {{helper "m:core" "property" "DBParameterGroupName" valueVariable="dbParameterGroupName" optional=true}}
+    {{helper "m:core" "property" "DBSecurityGroups" valueVariable="dbSecurityGroups" optional=true}}
+    {{helper "m:core" "property" "DBSnapshotIdentifier" valueVariable="dbSnapshotIdentifier" optional=true}}
+    {{helper "m:core" "property" "DBSubnetGroupName" valueVariable="dbSubnetGroupName" optional=true}}
+    {{helper "m:core" "property" "Engine" optional=true}}
+    {{helper "m:core" "property" "EngineVersion" optional=true}}
+    {{helper "m:core" "property" "Iops" optional=true}}
+    {{helper "m:core" "property" "KmsKeyId" optional=true}}
+    {{helper "m:core" "property" "LicenseModel" optional=true}}
+    {{helper "m:core" "property" "MasterUsername" optional=true}}
+    {{helper "m:core" "property" "MasterUserPassword" optional=true}}
+    {{helper "m:core" "property" "MultiAZ" optional=true}}
+    {{helper "m:core" "property" "OptionGroupName" optional=true}}
+    {{helper "m:core" "property" "Port" optional=true}}
+    {{helper "m:core" "property" "PreferredBackupWindow" optional=true}}
+    {{helper "m:core" "property" "PreferredMaintenanceWindow" optional=true}}
+    {{helper "m:core" "property" "PubliclyAccessible" optional=true}}
+    {{helper "m:core" "property" "SourceDBInstanceIdentifier" optional=true}}
+    {{helper "m:core" "property" "StorageEncrypted" optional=true}}
+    {{helper "m:core" "property" "StorageType" optional=true}}
+    {{helper "m:core" "property" "Tags" optional=true}}
+    {{helper "m:core" "property" "VpcSecurityGroups" optional=true}}
+  {{/helper}}
 {{#if deletionPolicy}},"DeletionPolicy": "{{deletionPolicy}}"{{/if}}
 {{/resource}}

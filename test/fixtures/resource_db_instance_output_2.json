@@ -1,0 +1,9 @@
+{
+  "DBInstance": {
+    "Properties": {
+      "DBInstanceClass": "db.m4.large",
+      "Engine": "aurora"
+    },
+    "Type": "AWS::RDS::DBInstance"
+  }
+}

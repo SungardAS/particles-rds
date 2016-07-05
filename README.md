@@ -17,6 +17,104 @@
 
 ### cftemplates
 
+#### mysql/multi\_az
+
+#### mysql/read\_replica
+
+### outputs
+
+#### db\_instance/arn
+
+**Parameters**
+
+  * `dbInstanceLogicalId {String}` **required** DBInstance Logical ID
+
+#### db\_instance/endpoint\_address
+
+**Parameters**
+
+  * `dbInstanceLogicalId {String}` **required** DBInstance Logical ID
+
+#### db\_instance/endpoint\_port
+
+**Parameters**
+
+  * `dbInstanceLogicalId {String}` **required** DBInstance Logical ID
+
+#### db\_instance/id
+
+**Parameters**
+
+  * `dbInstanceLogicalId {String}` **required** DBInstance Logical ID
+
+### Parameters
+
+#### db\_instance/allocated\_storage
+
+#### db\_instance/db\_name
+
+#### db\_instance/instance\_class
+
+**Extends** `particles-core` `base`
+
+#### db\_instance/password
+
+**Extends** `particles-core` `base`
+
+#### db\_instance/snapshot\_identifier
+
+**Extends** `particles-core` `base`
+
+#### name\_tag
+
+**Extends** `particles-core` `base`
+
+#### vpc/security\_group\_id
+
+**Extends** `particles-core` `base`
+
+#### vpc/security\_group\_id\_list
+
+**Extends** `particles-core` `base`
+
+#### name\_tag
+
+**Extends** `particles-core` `base`
+
+### resources
+
+#### db\_cluster
+
+#### db\_instance
+
+#### db\_security\_group
+
+#### db\_subnet\_group
+
+### sets
+
+#### db\_cluster/output\_all
+
+**Parameters**
+
+  * `dbClusterLogicalId {String}` **required** DBCluster Logical ID
+
+#### db\_instance/output\_all
+
+**Parameters**
+
+  * `dbInstanceLogicalId {String}` **required** DBInstance Logical ID
+
+#### mysql/params\_common
+
+#### mysql/params\_multi\_az
+
+#### mysql/params\_multi\_az\_with\_read\_replica
+
+#### mysql/params\_network
+
+#### vpc\_security\_group
+
 
 [condensation-image]: https://raw.githubusercontent.com/SungardAS/condensation/master/docs/images/condensation_logo.png
 [condensation-url]: https://github.com/SungardAS/condensation

@@ -3,7 +3,7 @@
   {{parameter "name_tag" logicalId="NameTag"}}
 
   {{set "mysql/params_multi_az"}}
-  {{set "mysql/network_params"}}
+  {{set "mysql/params_network"}}
   {{set "mysql/vpc_security_group" securityGroupVpcId=(ref "VpcId") securityGroupDescription="RDS MySQL"}}
 
   {{
