@@ -1,0 +1,28 @@
+{
+  "DBInstance": {
+    "Properties": {
+      "BackupRetentionPeriod": 7,
+      "DBInstanceClass": "db.m4.large",
+      "DBName": "dbName",
+      "DBSubnetGroupName": {
+        "Ref": "DBSubnetGroup"
+      },
+      "Engine": "aurora",
+      "EngineVersion": "5.6.10a",
+      "KmsKeyId": "arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef",
+      "MasterUserPassword": "password",
+      "MasterUsername": "user",
+      "Port": "3306",
+      "PreferredBackupWindow": "22:00-22:30",
+      "PreferredMaintenanceWindow": "02:00-02:30",
+      "StorageEncrypted": "true",
+      "Tags": [
+        {
+          "Key": "Name",
+          "Value": "test"
+        }
+      ]
+    },
+    "Type": "AWS::RDS::DBInstance"
+  }
+}

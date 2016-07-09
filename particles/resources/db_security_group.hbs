@@ -1,8 +1,8 @@
-{{#resource logicalId="DBSecurityGroup"}}
-  "Type": "AWS::RDS::DBSecurityGroup",
-  "Condition": "DBSecurityGroupIdIsEmpty",
-  "Properties": {
-    "GroupDescription": "RDS MySQL",
-    "VpcId": {"Ref": "VpcId"}
-  }
+{{#resource type="AWS::RDS::DBSecurityGroup"}}
+  {{helper "m:core" "properties"}}
+    {{helper "m:core" "property" "EC2VpcId" optional=true}}
+    {{helper "m:core" "property" "DBSecurityGroupIngress"}}
+    {{helper "m:core" "property" "GroupDescription"}}
+    {{helper "m:core" "property" "Tags" optional=true}}
+  {{/helper}}
 {{/resource}}

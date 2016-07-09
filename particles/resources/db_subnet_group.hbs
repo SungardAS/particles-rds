@@ -1,7 +1,7 @@
 {{#resource "m:core" "base" type="AWS::RDS::DBSubnetGroup"}}
-  "Properties": {
-    "DBSubnetGroupDescription": {{helper "m:core" "propertyValue" groupDescription}},
-    "SubnetIds": {{helper "m:core" "propertyValue" subnetIds}}
-    {{#if tags}},"Tags": {{helper "m:core" "propertyValue" tags}}{{/if}}
-  }
+  {{#helper "m:core" "properties"}}
+    {{helper "m:core" "property" "DBSubnetGroupDescription" valueVariable="groupDescription"}}
+    {{helper "m:core" "property" "SubnetIds"}}
+    {{helper "m:core" "property" "Tags" optional=true}}
+  {{/helper}}
 {{/resource}}

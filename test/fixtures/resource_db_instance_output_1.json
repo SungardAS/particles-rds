@@ -1,0 +1,8 @@
+{
+  "DBInstance": {
+    "Properties": {
+      "DBInstanceClass": ""
+    },
+    "Type": "AWS::RDS::DBInstance"
+  }
+}
