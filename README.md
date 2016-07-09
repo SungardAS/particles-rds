@@ -51,7 +51,11 @@
 
 #### db\_instance/allocated\_storage
 
+**Extends** `particles-core` `base`
+
 #### db\_instance/db\_name
+
+**Extends** `particles-core` `base`
 
 #### db\_instance/instance\_class
 
@@ -85,11 +89,76 @@
 
 #### db\_cluster
 
+**Extends** `particles-core` `base`
+
+**Parameters**
+
+  * `availabilityZones {String}` A list of Availability Zones
+  * `backupRetentionPeriod {Integer}` number of days for which automatic backups are retained
+  * `databaseName {String}` name of the database
+  * `dbClusterParameterGroupName {String}` name of the DB cluster parameter group
+  * `dbSubnetGroupName {String}` A DB subnet group
+  * `engine {String}` **required** name of the database engine
+  * `engineVersion {String}` version number of the database engine
+  * `kmsKeyId {String}` ARN of a AWS Key Management Service master key
+  * `masterUsername {String}` master user name for the DB instance
+  * `masterUserPassword {String}` password for the master database user
+  * `port {Integer}` port number that will accept connections
+  * `preferredBackupWindow {String}` daily time range in UTC during which you want to create automated backups
+  * `preferredMaintenanceWindow {String}` weekly time range (in UTC) during which system maintenance can occur
+  * `snapshotIdentifier {String}` identifier for the DB cluster snapshot to restore from
+  * `storageEncrypted {Boolean}` whether the DB instances in the cluster are encrypted
+  * `tags {Array}` tags to attach to this DB cluster
+  * `vpcSecurityGroupIds {Array}` list of VPC security groups
+
+
 #### db\_instance
 
-#### db\_security\_group
+**Extends** `particles-core` `base`
+
+**Parameters**
+
+  * `allocatedStorage {String}` storage size specified in gigabytes (GB)
+  * `allowMajorVersionUpgrade {Boolean}` whether major version upgrades are allowed
+  * `autoMinorVersionUpgrade {Boolean}` minor engine upgrades will be applied automatically
+  * `availabilityZone {String}` name of the Availability Zone where the DB instance is located
+  * `backupRetentionPeriod {Integer}` number of days for which automatic backups are retained
+  * `characterSetName {String}` haracter set to associate with the database instance
+  * `dbClusterIdentifier {String}` existing DB cluster that this instance will be associated with
+  * `dbInstanceClass {String}` **required** name of the DB cluster parameter group
+  * `dbInstanceIdentifier {String}` A name for the DB instance
+  * `databaseName {String}` name of the database
+  * `dbParameterGroupName {String}` name of the DB parameter group
+  * `dbSecurityGroups {Array}` list of the DB security groups
+  * `dbSnapshotIdentifier {String}` identifier for the DB snapshot to restore from
+  * `dbSubnetGroupName {String}` A DB subnet group
+  * `engine {String}` name of the database engine
+  * `engineVersion {String}` version number of the database engine
+  * `iops {Number}` number of I/O operations per second
+  * `kmsKeyId {String}` ARN of a AWS Key Management Service master key
+  * `licenseModel {String}` license model information
+  * `masterUsername {String}` master user name for the DB instance
+  * `masterUserPassword {String}` password for the master database user
+  * `multiAZ {Boolean}` if the database instance is a multiple Availability Zone deployment
+  * `optionGroupName {String}` option group that this database instance is associated with
+  * `port {Integer}` port number that will accept connections
+  * `preferredBackupWindow {String}` daily time range in UTC during which you want to create automated backups
+  * `preferredMaintenanceWindow {String}` weekly time range (in UTC) during which system maintenance can occur
+  * `publiclyAccessible {Boolean}` whether the database instance is an Internet-facing instance
+  * `sourceDBInstanceIdentifier {String}` whether a database instance is a read replica
+  * `storageEncrypted {Boolean}` whether the DB instances in the cluster are encrypted
+  * `tags {Array}` tags to attach to this DB cluster
+  * `vpcSecurityGroupIds {Array}` list of VPC security groups
 
 #### db\_subnet\_group
+
+**Extends** `particles-core` `base`
+
+**Parameters**
+
+  * `groupDescription {String}`
+  * `subnetIds {Array}`
+  * `tags {Array}`
 
 ### sets
 
@@ -116,6 +185,19 @@
 #### vpc\_security\_group
 
 
+## Sungard Availability Services | Labs
+[![Sungard Availability Services | Labs][labs-logo]][labs-github-url]
+
+This project is maintained by the Labs team at [Sungard Availability
+Services](http://sungardas.com)
+
+GitHub: [https://sungardas.github.io](https://sungardas.github.io)
+
+Blog: [http://blog.sungardas.com/CTOLabs/](http://blog.sungardas.com/CTOLabs/)
+
+
+[labs-github-url]: https://sungardas.github.io
+[labs-logo]: https://raw.githubusercontent.com/SungardAS/repo-assets/master/images/logos/sungardas-labs-logo-small.png
 [condensation-image]: https://raw.githubusercontent.com/SungardAS/condensation/master/docs/images/condensation_logo.png
 [condensation-url]: https://github.com/SungardAS/condensation
 [npm-image]: https://badge.fury.io/js/particles-rds.svg

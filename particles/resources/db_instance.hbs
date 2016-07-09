@@ -1,6 +1,5 @@
 {{#resource "m:core" "base" type="AWS::RDS::DBInstance"}}
   {{#helper "m:core" "properties"}}
-    {{helper "m:core" "property" "DBInstanceClass" valueVariable="dbInstanceClass"}}
     {{helper "m:core" "property" "AllocatedStorage" optional=true}}
     {{helper "m:core" "property" "AllowMajorVersionUpgrade" optional=true}}
     {{helper "m:core" "property" "AutoMinorVersionUpgrade" optional=true}}
@@ -8,7 +7,7 @@
     {{helper "m:core" "property" "BackupRetentionPeriod" optional=true}}
     {{helper "m:core" "property" "CharacterSetName" optional=true}}
     {{helper "m:core" "property" "DBClusterIdentifier" valueVariable="dbClusterIdentifier" optional=true}}
-    {{helper "m:core" "property" "DBInstanceClass" valueVariable="dbInstanceClass" optional=true}}
+    {{helper "m:core" "property" "DBInstanceClass" valueVariable="dbInstanceClass"}}
     {{helper "m:core" "property" "DBInstanceIdentifier" valueVariable="dbInstanceIdentifier" optional=true}}
     {{helper "m:core" "property" "DBName" valueVariable="dbName" optional=true}}
     {{helper "m:core" "property" "DBParameterGroupName" valueVariable="dbParameterGroupName" optional=true}}
