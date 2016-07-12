@@ -31,7 +31,7 @@
     {{helper "m:core" "property" "StorageEncrypted" optional=true}}
     {{helper "m:core" "property" "StorageType" optional=true}}
     {{helper "m:core" "property" "Tags" optional=true}}
-    {{helper "m:core" "property" "VpcSecurityGroups" optional=true}}
+    {{helper "m:core" "property" "VPCSecurityGroups" valueVariable="vpcSecurityGroups" optional=true}}
   {{/helper}}
 {{#if deletionPolicy}},"DeletionPolicy": "{{deletionPolicy}}"{{/if}}
 {{/resource}}
