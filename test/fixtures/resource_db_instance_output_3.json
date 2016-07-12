@@ -21,6 +21,11 @@
           "Key": "Name",
           "Value": "test"
         }
+      ],
+      "VPCSecurityGroups": [
+        {
+          "Ref": "SecurityGroup1"
+        }
       ]
     },
     "Type": "AWS::RDS::DBInstance"

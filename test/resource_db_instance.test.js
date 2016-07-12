@@ -44,6 +44,7 @@ describe("resources", function() {
             preferredBackupWindow: "22:00-22:30",
             preferredMaintenanceWindow: "02:00-02:30",
             storageEncrypted: true,
+            vpcSecurityGroups:[{"Ref": "SecurityGroup1"}],
             tags: [{"Key": "Name", "Value": "test"}],
           }
         }
